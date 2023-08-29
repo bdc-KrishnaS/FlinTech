@@ -1,13 +1,12 @@
 FROM python:3.7
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY . /app
+COPY requirements.txt ./
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python"]
-
+COPY . .
 EXPOSE 5000
 
-CMD ["app.py"]
+CMD ["python", "./app.py"]

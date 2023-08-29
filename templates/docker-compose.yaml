@@ -1,0 +1,31 @@
+version: '3'
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "8089:80"
+    depends_on:
+      - mysql
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: root
+      WORDPRESS__DB_PASSWORD: 'PassWd'
+      WORDPRESS__DB_NAME: wordpress
+    networks:
+      testenv:
+        ipv4_address: ""
+  mysql:
+    image: "mysql:8.1"
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: "PassWd"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      testenv:
+        ipv4_address: ""
+networks:
+  testenv:
+  ipam:
+    driver: default
+    
